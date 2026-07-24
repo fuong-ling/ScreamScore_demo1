@@ -65,11 +65,11 @@ const FRONTEND_FALLBACK_CAPTIONS = {
 }
 
 const FRONTEND_FALLBACK_GIFS = {
-  low: './assets/reactions/low.svg',
-  medium: './assets/reactions/medium.svg',
-  high: './assets/reactions/high.svg',
-  extreme: './assets/reactions/extreme.svg',
-  mystery: './assets/reactions/mystery.svg'
+  low: './low.svg',
+  medium: './medium.svg',
+  high: './high.svg',
+  extreme: './extreme.svg',
+  mystery: './mystery.svg'
 }
 
 const SCREAM_TYPES = {
@@ -753,7 +753,7 @@ async function ensureMeterReady() {
   if (!state.loudnessMeter) {
     state.loudnessMeter = new LoudnessMeter({
       source: state.micSource,
-      workerUri: './vendor/needles/needles-worker.js',
+      workerUri: './needles-worker.js',
       modes: ['momentary', 'short-term', 'integrated']
     })
 
