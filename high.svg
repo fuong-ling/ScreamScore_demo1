@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-label="Dramatic office meltdown">
+  <rect width="640" height="360" rx="28" fill="#7f1d1d"/>
+  <path d="M165 245c60-120 250-120 310 0" fill="#fecaca"/>
+  <circle cx="320" cy="154" r="70" fill="#fee2e2"/>
+  <circle cx="292" cy="143" r="10" fill="#111827"/>
+  <circle cx="348" cy="143" r="10" fill="#111827"/>
+  <path d="M278 196c32 28 65 28 98 0" fill="none" stroke="#111827" stroke-width="10" stroke-linecap="round"/>
+  <path d="M130 140h110M400 140h110" stroke="#facc15" stroke-width="16" stroke-linecap="round"/>
+  <text x="320" y="310" fill="#fff" font-family="Arial, sans-serif" font-size="34" font-weight="800" text-anchor="middle">micro wants to resign</text>
+</svg>

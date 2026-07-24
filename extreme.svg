@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-label="Chaos screaming crowd reaction">
+  <rect width="640" height="360" rx="28" fill="#581c87"/>
+  <circle cx="230" cy="150" r="54" fill="#fef3c7"/>
+  <circle cx="320" cy="125" r="64" fill="#fecdd3"/>
+  <circle cx="420" cy="154" r="52" fill="#bfdbfe"/>
+  <path d="M205 210h230l45 90H160z" fill="#f97316"/>
+  <circle cx="302" cy="120" r="8" fill="#111827"/>
+  <circle cx="338" cy="120" r="8" fill="#111827"/>
+  <ellipse cx="320" cy="158" rx="26" ry="36" fill="#111827"/>
+  <path d="M90 92 135 45M520 48l35 54M88 250l55 26M502 275l58-38" stroke="#fde047" stroke-width="16" stroke-linecap="round"/>
+  <text x="320" y="326" fill="#fff" font-family="Arial, sans-serif" font-size="32" font-weight="800" text-anchor="middle">the whole area heard that</text>
+</svg>
