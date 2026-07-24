@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Scream App - Needles Mic Prototype</title>
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="prefetch" as="worker" href="./vendor/needles/needles-worker.js" type="text/javascript">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="panel meter-panel" aria-label="Scream test">
+        <form class="nickname-panel" id="nicknameForm">
+          <label for="nicknameInput">ENTER YOUR NAME</label>
+          <div class="nickname-row">
+            <input id="nicknameInput" name="nickname" type="text" minlength="2" maxlength="20" placeholder="Katie" autocomplete="nickname" required>
+            <button class="secondary-button" id="nicknameStartButton" type="button">START</button>
+          </div>
+          <p id="nicknameError"></p>
+        </form>
+
+        <div class="player-chip" id="playerChip" hidden>
+          <span>PLAYER</span>
+          <strong id="playerName">-</strong>
+        </div>
+
+        <div class="status-row">
+          <span class="status-dot" id="micStatusDot" aria-hidden="true"></span>
+          <span id="micStatus">Microphone not requested</span>
+        </div>
+
+        <div class="mic-actions">
+          <button class="secondary-button" id="enableMicButton" type="button">Ask Mic Permission</button>
+          <button class="secondary-button" id="testMicButton" type="button">Test Mic Only</button>
+        </div>
+
+        <div class="readout">
+          <span class="eyebrow">Live loudness</span>
+          <strong id="liveMomentary">-Inf LUFS</strong>
+          <span id="liveMode">Momentary</span>
+        </div>
+
+        <div class="meter" aria-label="Live loudness meter">
+          <div class="meter-fill" id="meterFill"></div>
+          <div class="meter-scale">
+            <span>-70</span>
+            <span>-50</span>
+            <span>-30</span>
+            <span>-10 LUFS</span>
+          </div>
+        </div>
+
+        <button class="scream-button" id="screamButton" type="button">
+          ENABLE MIC FIRST
+        </button>
+
+        <div class="timer" id="durationLive">0.00s</div>
+      </section>
+
+      <section class="panel results-panel" aria-label="Last scream result">
+        <div class="results-header">
+          <h1>Scream App Technical Prototype</h1>
+          <button class="restart-button" id="restartButton" type="button">Restart</button>
+        </div>
+        <div class="result-grid">
+          <div>
+            <span>Peak observed loudness</span>
+            <strong id="peakResult">-</strong>
+          </div>
+          <div>
+            <span>Average / integrated loudness</span>
+            <strong id="integratedResult">-</strong>
+          </div>
+          <div>
+            <span>Duration</span>
+            <strong id="durationResult">-</strong>
+          </div>
+          <div>
+            <span>Scream Score</span>
+            <strong id="scoreResult">0</strong>
+            <b class="scream-type" id="screamTypeResult">-</b>
+            <figure class="reaction-media" id="reactionMedia" hidden>
+              <img id="reactionGif" alt="Funny scream reaction" loading="lazy">
+              <figcaption id="reactionAttribution"></figcaption>
+            </figure>
+            <div class="caption-row">
+              <span class="caption-icon" id="captionIcon" aria-hidden="true"></span>
+              <p class="caption-result" id="captionResult">Funny reaction will appear here.</p>
+            </div>
+            <span class="today-rank" id="todayRank">#7 TODAY</span>
+          </div>
+        </div>
+        <div class="result-actions">
+          <button class="primary-result-button" id="screamAgainButton" type="button">SCREAM AGAIN</button>
+          <button class="primary-result-button" id="submitScoreButton" type="button" disabled>SUBMIT TO LEADERBOARD</button>
+          <button class="secondary-result-button" id="shareButton" type="button" disabled>CHALLENGE YOUR FRIENDS</button>
+          <button class="secondary-result-button" id="viewLeaderboardButton" type="button">VIEW LEADERBOARD</button>
+        </div>
+      </section>
+
+      <section class="panel leaderboard-panel" id="leaderboardPanel" aria-label="Online leaderboard">
+        <div class="leaderboard-header">
+          <h2>TODAY'S SCREAMBOARD</h2>
+          <div class="leaderboard-tabs" role="tablist" aria-label="Leaderboard mode">
+            <button class="tab-button is-active" id="todayTab" type="button">TODAY</button>
+            <button class="tab-button" id="allTimeTab" type="button">ALL TIME</button>
+          </div>
+        </div>
+        <ol class="leaderboard-list" id="leaderboardList"></ol>
+        <p class="leaderboard-empty" id="leaderboardEmpty">Leaderboard wakes up after the first submitted scream.</p>
+        <div class="rank-callout" id="rankCallout" hidden>
+          <span>YOUR RANK</span>
+          <strong id="userRank">-</strong>
+          <p>Not bad. Your neighbors definitely noticed.</p>
+        </div>
+      </section>
+
+      <section class="panel debug-panel" aria-label="Debugging panel">
+        <h2>Debugging Panel</h2>
+        <dl>
+          <div>
+            <dt>microphone detected</dt>
+            <dd id="debugMicDetected">false</dd>
+          </div>
+          <div>
+            <dt>browser mic API</dt>
+            <dd id="debugMicApi">checking</dd>
+          </div>
+          <div>
+            <dt>page origin</dt>
+            <dd id="debugOrigin">checking</dd>
+          </div>
+          <div>
+            <dt>secure context</dt>
+            <dd id="debugSecureContext">checking</dd>
+          </div>
+          <div>
+            <dt>mic permission</dt>
+            <dd id="debugMicPermission">checking</dd>
+          </div>
+          <div>
+            <dt>last mic error</dt>
+            <dd id="debugMicError">none</dd>
+          </div>
+          <div>
+            <dt>momentary loudness</dt>
+            <dd id="debugMomentary">-Inf LUFS</dd>
+          </div>
+          <div>
+            <dt>short-term loudness</dt>
+            <dd id="debugShortTerm">-Inf LUFS</dd>
+          </div>
+          <div>
+            <dt>integrated loudness</dt>
+            <dd id="debugIntegrated">-Inf LUFS</dd>
+          </div>
+          <div>
+            <dt>duration</dt>
+            <dd id="debugDuration">0.00s</dd>
+          </div>
+          <div>
+            <dt>current scream score</dt>
+            <dd id="debugScore">0</dd>
+          </div>
+          <div>
+            <dt>Needles event latency</dt>
+            <dd id="debugLatency">waiting</dd>
+          </div>
+          <div>
+            <dt>notes</dt>
+            <dd id="debugNotes">Press and hold the button to request mic access and start metering.</dd>
+          </div>
+        </dl>
+      </section>
+    </main>
+
+    <script src="./vendor/needles/needles.umd.js" defer></script>
+    <script src="./src/app.js" defer></script>
+  </body>
+</html>
