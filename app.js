@@ -321,12 +321,6 @@ document.addEventListener('touchend', stopScream)
 elements.screamButton.addEventListener('keydown', (event) => {
   if ((event.code === 'Space' || event.code === 'Enter') && !state.isRecording) {
     event.preventDefault()
- startScream(event)
-}, { passive: false })
-document.addEventListener('touchend', stopScream)
-elements.screamButton.addEventListener('keydown', (event) => {
-  if ((event.code === 'Space' || event.code === 'Enter') && !state.isRecording) {
-    event.preventDefault()
     startScream(event)
   }
 })
